@@ -4,18 +4,15 @@ import ProductSection from './ProductSection'
 import { mockProducts } from '@/lib/mockData'
 
 export default function AccessoriesSection() {
-  // Mock data - показываем для демонстрации
+  // Mock data - показываем аксессуары
   const products = mockProducts.filter(p => p.category_name === 'Аксессуары')
-  
-  // Дублируем для заполнения
-  const displayProducts = [...products, ...products, ...products]
 
   return (
     <ProductSection
       title="Аксессуары"
       subtitle="Мышки, клавиатуры, наушники и многое другое"
       viewAllLink="/catalog/accessories"
-      products={displayProducts}
+      products={products}
       backgroundColor="bg-gradient-to-r from-blue-50 to-purple-50"
     />
   )

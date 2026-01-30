@@ -47,6 +47,7 @@ export default function Header() {
               alt="Elements KZ" 
               width={50} 
               height={50}
+              priority
               className="object-contain"
             />
             <span className="text-2xl font-bold">

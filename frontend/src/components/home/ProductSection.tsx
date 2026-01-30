@@ -121,8 +121,8 @@ export default function ProductSection({
             className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {products.map((product) => (
-              <div key={product.id} className="flex-shrink-0 w-[240px]">
+            {products.map((product, index) => (
+              <div key={`${product.id}-${index}`} className="flex-shrink-0 w-[240px]">
                 <ProductCard product={product} />
               </div>
             ))}
