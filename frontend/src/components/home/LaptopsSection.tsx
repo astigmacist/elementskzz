@@ -1,11 +1,20 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import ProductSection from './ProductSection'
-import { mockProducts } from '@/lib/mockData'
+import { productsApi } from '@/lib/api'
+import { Product } from '@/types'
 
 export default function LaptopsSection() {
-  // Mock data - показываем ноутбуки
-  const products = mockProducts.filter(p => p.category_name === 'Ноутбуки')
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    productsApi.getAll({ category__slug: 'laptops', page_size: 12 })
+      .then(r => setProducts(r.data?.results || r.data || []))
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false))
+  }, [])
 
   return (
     <ProductSection
@@ -13,8 +22,8 @@ export default function LaptopsSection() {
       subtitle="Мощные ноутбуки для любых задач"
       viewAllLink="/catalog/laptops"
       products={products}
+      loading={loading}
       backgroundColor="bg-gray-50"
     />
   )
 }
-

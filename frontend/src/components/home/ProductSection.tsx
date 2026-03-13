@@ -12,6 +12,7 @@ interface ProductSectionProps {
   products?: Product[]
   viewAllLink?: string
   backgroundColor?: string
+  loading?: boolean
 }
 
 export default function ProductSection({
@@ -21,30 +22,39 @@ export default function ProductSection({
   products: initialProducts,
   viewAllLink,
   backgroundColor = 'bg-white',
+  loading: externalLoading,
 }: ProductSectionProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts || [])
-  const [loading, setLoading] = useState(!initialProducts)
+  const [internalLoading, setInternalLoading] = useState(!initialProducts && !!apiEndpoint)
+  const loading = externalLoading ?? internalLoading
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (apiEndpoint && !initialProducts) {
+    if (initialProducts) {
+      setProducts(initialProducts)
+    }
+  }, [initialProducts])
+
+  useEffect(() => {
+    if (apiEndpoint) {
       const fetchProducts = async () => {
         try {
-          setLoading(true)
-          // API call will be implemented when backend is ready
-          // const response = await axios.get(apiEndpoint)
-          // setProducts(response.data)
-          setProducts([])
+          setInternalLoading(true)
+          const { default: axios } = await import('axios')
+          const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'
+          const response = await axios.get(`${baseURL}${apiEndpoint}`)
+          const data = response.data
+          setProducts(data.results || data || [])
         } catch (error) {
           console.error('Error fetching products:', error)
+          setProducts([])
         } finally {
-          setLoading(false)
+          setInternalLoading(false)
         }
       }
-
       fetchProducts()
     }
-  }, [apiEndpoint, initialProducts])
+  }, [apiEndpoint])
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {

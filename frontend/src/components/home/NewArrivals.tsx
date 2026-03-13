@@ -1,18 +1,28 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import ProductSection from './ProductSection'
-import { mockProducts } from '@/lib/mockData'
+import { productsApi } from '@/lib/api'
+import { Product } from '@/types'
 
 export default function NewArrivals() {
-  // Mock data - показываем новинки
-  const products = mockProducts.filter(p => p.is_new)
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    productsApi.getNewArrivals()
+      .then(r => setProducts(r.data?.results || r.data || []))
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false))
+  }, [])
 
   return (
     <ProductSection
       title="🆕 Новинки"
-      subtitle="Только что поступили в продажу"
+      subtitle="Самые свежие поступления"
       viewAllLink="/catalog?new=true"
       products={products}
+      loading={loading}
       backgroundColor="bg-white"
     />
   )

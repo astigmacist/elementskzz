@@ -13,17 +13,17 @@ export default function Footer() {
               Elements<span className="text-primary-500">.KZ</span>
             </h3>
             <p className="text-sm mb-4">
-              Интернет-магазин электроники и компьютерной техники в Казахстане. 
+              Интернет-магазин электроники и компьютерной техники в Казахстане.
               Качественные товары по доступным ценам.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-primary-500 transition-colors">
+              <a href="https://t.me/elements_kz" target="_blank" rel="noopener noreferrer" className="hover:text-primary-500 transition-colors">
                 <FaTelegram className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-primary-500 transition-colors">
+              <a href="https://wa.me/77001234567" target="_blank" rel="noopener noreferrer" className="hover:text-primary-500 transition-colors">
                 <FaWhatsapp className="w-6 h-6" />
               </a>
-              <a href="#" className="hover:text-primary-500 transition-colors">
+              <a href="https://instagram.com/elements_kz" target="_blank" rel="noopener noreferrer" className="hover:text-primary-500 transition-colors">
                 <FaInstagram className="w-6 h-6" />
               </a>
             </div>
@@ -33,31 +33,12 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Каталог</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/catalog/computers" className="hover:text-primary-500 transition-colors">
-                  Компьютеры
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog/laptops" className="hover:text-primary-500 transition-colors">
-                  Ноутбуки
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog/accessories" className="hover:text-primary-500 transition-colors">
-                  Аксессуары
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog/printers" className="hover:text-primary-500 transition-colors">
-                  Принтеры
-                </Link>
-              </li>
-              <li>
-                <Link href="/deals" className="hover:text-primary-500 transition-colors">
-                  Акции
-                </Link>
-              </li>
+              <li><Link href="/catalog/computers" className="hover:text-primary-500 transition-colors">Компьютеры</Link></li>
+              <li><Link href="/catalog/laptops" className="hover:text-primary-500 transition-colors">Ноутбуки</Link></li>
+              <li><Link href="/catalog/monitors" className="hover:text-primary-500 transition-colors">Мониторы</Link></li>
+              <li><Link href="/catalog/accessories" className="hover:text-primary-500 transition-colors">Аксессуары</Link></li>
+              <li><Link href="/catalog/printers" className="hover:text-primary-500 transition-colors">Принтеры</Link></li>
+              <li><Link href="/b2b" className="text-primary-400 hover:text-primary-300 transition-colors font-medium">Юридическим лицам</Link></li>
             </ul>
           </div>
 
@@ -65,31 +46,12 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Информация</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about" className="hover:text-primary-500 transition-colors">
-                  О нас
-                </Link>
-              </li>
-              <li>
-                <Link href="/delivery" className="hover:text-primary-500 transition-colors">
-                  Доставка и оплата
-                </Link>
-              </li>
-              <li>
-                <Link href="/warranty" className="hover:text-primary-500 transition-colors">
-                  Гарантия
-                </Link>
-              </li>
-              <li>
-                <Link href="/return" className="hover:text-primary-500 transition-colors">
-                  Возврат товара
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-primary-500 transition-colors">
-                  Контакты
-                </Link>
-              </li>
+              <li><Link href="/about" className="hover:text-primary-500 transition-colors">О нас</Link></li>
+              <li><Link href="/delivery" className="hover:text-primary-500 transition-colors">Доставка и оплата</Link></li>
+              <li><Link href="/warranty" className="hover:text-primary-500 transition-colors">Гарантия</Link></li>
+              <li><Link href="/return" className="hover:text-primary-500 transition-colors">Возврат товара</Link></li>
+              <li><Link href="/contact" className="hover:text-primary-500 transition-colors">Контакты</Link></li>
+              <li><Link href="/b2b" className="hover:text-primary-500 transition-colors">B2B / Оптовые клиенты</Link></li>
             </ul>
           </div>
 

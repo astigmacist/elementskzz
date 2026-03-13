@@ -25,7 +25,7 @@ class BrandSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Brand
-        fields = ['id', 'name', 'slug', 'logo', 'description']
+        fields = ['id', 'name', 'slug', 'logo', 'description', 'is_active']
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -73,15 +73,39 @@ class ProductListSerializer(serializers.ModelSerializer):
             'brand', 'brand_name', 'short_description',
             'price', 'old_price', 'discount_percentage',
             'main_image', 'rating', 'reviews_count',
-            'is_new', 'is_featured', 'is_available'
+            'is_new', 'is_featured', 'is_available',
+            'sku', 'stock', 'is_active', 'views_count',
+            'created_at',
         ]
+
+
+class ProductAdminSerializer(serializers.ModelSerializer):
+    """Сериализатор для создания/редактирования товаров (только для админа)"""
+
+    category_name = serializers.CharField(source='category.name', read_only=True)
+    brand_name = serializers.CharField(source='brand.name', read_only=True)
+
+    class Meta:
+        model = Product
+        fields = [
+            'id', 'name', 'slug', 'category', 'category_name',
+            'brand', 'brand_name',
+            'description', 'short_description',
+            'price', 'old_price', 'discount_percentage',
+            'sku', 'stock', 'is_available',
+            'main_image',
+            'rating', 'reviews_count',
+            'is_new', 'is_featured', 'is_active',
+            'views_count', 'created_at', 'updated_at',
+        ]
+        read_only_fields = ['slug', 'rating', 'reviews_count', 'views_count', 'created_at', 'updated_at']
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     """Сериализатор для детальной информации о товаре"""
     
-    category = CategorySerializer(read_only=True)
-    brand = BrandSerializer(read_only=True)
+    category_name = serializers.CharField(source='category.name', read_only=True)
+    brand_name = serializers.CharField(source='brand.name', read_only=True)
     images = ProductImageSerializer(many=True, read_only=True)
     specifications = ProductSpecificationSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only=True)
@@ -89,7 +113,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            'id', 'name', 'slug', 'category', 'brand',
+            'id', 'name', 'slug', 'category', 'category_name', 'brand', 'brand_name',
             'description', 'short_description',
             'price', 'old_price', 'discount_percentage',
             'sku', 'stock', 'is_available',
@@ -99,4 +123,3 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'is_new', 'is_featured',
             'views_count', 'created_at', 'updated_at'
         ]
-

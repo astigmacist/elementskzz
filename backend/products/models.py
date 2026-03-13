@@ -93,7 +93,7 @@ class Product(models.Model):
     is_available = models.BooleanField('В наличии', default=True)
     
     # Изображения
-    main_image = models.ImageField('Главное изображение', upload_to='products/')
+    main_image = models.ImageField('Главное изображение', upload_to='products/', blank=True, null=True)
     
     # Рейтинг и отзывы
     rating = models.DecimalField('Рейтинг', max_digits=3, decimal_places=2, default=0)
